@@ -3,11 +3,11 @@ package model.impl;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
 import model.intf.ImageLoader;
 import model.intf.ImageModel;
 
 public class PPMImageLoader implements ImageLoader {
+
   @Override
   public ImageModel loadImage(String path, String name) {
 
@@ -42,12 +42,11 @@ public class PPMImageLoader implements ImageLoader {
     int maxValue = sc.nextInt();
     System.out.println("Maximum value of a color in this file (usually 255): " + maxValue);
 
-    if (maxValue > 255){
+    if (maxValue > 255) {
       throw new IllegalArgumentException("Max value wrong in the file!");
     }
 
-    ImageModel imageModel = new RGBImageModel(width, height);
-
+    ImageModel imageModel = new RGBImageModel(name, width, height);
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {

@@ -89,6 +89,7 @@ public class RGBImageModel implements ImageModel {
    *
    * @return - width of the image
    */
+  @Override
   public int getWidth() {
     return width;
   }
@@ -98,6 +99,7 @@ public class RGBImageModel implements ImageModel {
    *
    * @return - height of the image
    */
+  @Override
   public int getHeight() {
     return height;
   }
@@ -107,6 +109,7 @@ public class RGBImageModel implements ImageModel {
    *
    * @return - red value of the pixel
    */
+  @Override
   public int getRed(int x, int y) {
     return red[x][y];
   }
@@ -116,6 +119,7 @@ public class RGBImageModel implements ImageModel {
    *
    * @return - green value of the pixel
    */
+  @Override
   public int getGreen(int x, int y) {
     return green[x][y];
   }
@@ -125,6 +129,7 @@ public class RGBImageModel implements ImageModel {
    *
    * @return - blue value of the pixel
    */
+  @Override
   public int getBlue(int x, int y) {
     return blue[x][y];
   }

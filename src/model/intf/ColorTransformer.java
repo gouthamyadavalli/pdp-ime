@@ -11,7 +11,7 @@ public interface ColorTransformer {
    * @param image - image to be converted
    * @return - greyscale image
    */
-  ImageModel greyScale(ImageModel image);
+  Image greyScale(Image image);
 
   /**
    * Converts the image to sepia.
@@ -19,6 +19,6 @@ public interface ColorTransformer {
    * @param image - image to be converted
    * @return - sepia image
    */
-  ImageModel sepia(ImageModel image);
+  Image sepia(Image image);
 
 }

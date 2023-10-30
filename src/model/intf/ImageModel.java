@@ -1,75 +1,60 @@
 package model.intf;
 
-/**
- * This interface represents an image model.
- */
 public interface ImageModel {
 
-  /**
-   * Sets the red value of the pixel at the given coordinates.
-   *
-   * @param x     the x coordinate
-   * @param y     the y coordinate
-   * @param value the red value
-   */
-  void setRed(int x, int y, int value);
+  void load(String path, String name);
+
+  void save(String path, String name);
+
+  void RGBSplit(String path, String name);
 
   /**
-   * Sets the green value of the pixel at the given coordinates.
+   * Brightens/Darkens the image by the given factor.
    *
-   * @param x     - x coordinate
-   * @param y     - y coordinate
-   * @param value - green value
+   * @param image  - image to be brightened
+   * @param factor - factor by which the image is to be brightened
    */
-  void setGreen(int x, int y, int value);
+  void brighten(Image image, int factor);
 
   /**
-   * Sets the blue value of the pixel at the given coordinates.
+   * Blurs the image.
    *
-   * @param x     - x coordinate
-   * @param y     - y coordinate
-   * @param value - blue value
+   * @param image - image to be blurred
    */
-  void setBlue(int x, int y, int value);
+  void blur(Image image);
 
   /**
-   * Gets the width of the image.
+   * Sharpens the image.
    *
-   * @return - width of the image
+   * @param image - image to be sharpened
    */
-  int getWidth();
+  void sharpen(Image image);
 
   /**
-   * Gets the height of the image.
+   * Flips the image horizontally.
    *
-   * @return - height of the image
+   * @param image - image to be flipped
    */
-  int getHeight();
+  void horizontalFlip(Image image);
 
   /**
-   * Gets the red value of the pixel at the given coordinates.
+   * Flips the image vertically.
    *
-   * @param x - x coordinate
-   * @param y - y coordinate
-   * @return - red value
+   * @param image - image to be flipped
    */
-  int getRed(int x, int y);
+  void verticalFlip(Image image);
 
   /**
-   * Gets the green value of the pixel at the given coordinates.
+   * Converts the image to greyscale.
    *
-   * @param x - x coordinate
-   * @param y - y coordinate
-   * @return - green value
+   * @param image - image to be converted
    */
-  int getGreen(int x, int y);
+  void greyScale(Image image);
 
   /**
-   * Gets the blue value of the pixel at the given coordinates.
+   * Converts the image to sepia.
    *
-   * @param x - x coordinate
-   * @param y - y coordinate
-   * @return - blue value
+   * @param image - image to be converted
    */
-  int getBlue(int x, int y);
+  void sepia(Image image);
 }

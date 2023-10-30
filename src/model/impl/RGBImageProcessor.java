@@ -1,47 +1,47 @@
 package model.impl;
 
-import model.intf.ImageModel;
+import model.intf.Image;
 import model.intf.ImageProcessor;
 
 public class RGBImageProcessor implements ImageProcessor {
 
   @Override
-  public ImageModel brighten(ImageModel image, int factor) {
+  public Image brighten(Image image, int factor) {
     return null;
   }
 
   @Override
-  public ImageModel blur(ImageModel image) {
+  public Image blur(Image image) {
     return null;
   }
 
   @Override
-  public ImageModel sharpen(ImageModel image) {
+  public Image sharpen(Image image) {
     return null;
   }
 
   @Override
-  public ImageModel horizontalFlip(ImageModel image) {
+  public Image horizontalFlip(Image image) {
     return null;
   }
 
   @Override
-  public ImageModel verticalFlip(ImageModel image) {
+  public Image verticalFlip(Image image) {
     return null;
   }
 
   @Override
-  public int[][] getRedComponent(ImageModel image) {
+  public int[][] getRedComponent(Image image) {
     return new int[0][];
   }
 
   @Override
-  public int[][] getGreenComponent(ImageModel image) {
+  public int[][] getGreenComponent(Image image) {
     return new int[0][];
   }
 
   @Override
-  public int[][] getBlueComponent(ImageModel image) {
+  public int[][] getBlueComponent(Image image) {
     return new int[0][];
   }
 }

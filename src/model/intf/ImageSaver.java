@@ -1,5 +1,5 @@
 package model.intf;
 
 public interface ImageSaver {
-  void saveImage(ImageModel imageModel, String path);
+  void saveImage(Image image, String path);
 }

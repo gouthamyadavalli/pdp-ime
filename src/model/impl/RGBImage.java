@@ -1,11 +1,11 @@
 package model.impl;
 
-import model.intf.ImageModel;
+import model.intf.Image;
 
 /**
  * This class represents an RGB image model.
  */
-public class RGBImageModel implements ImageModel {
+public class RGBImage implements Image {
 
   /**
    * The name of the image.
@@ -39,50 +39,16 @@ public class RGBImageModel implements ImageModel {
    * @param width  the width of the image
    * @param height the height of the image
    */
-  public RGBImageModel(String name, int width, int height) {
+  public RGBImage(String name, int width, int height, int[][] red, int[][] green,
+                       int[][] blue) {
     this.name = name;
     this.width = width;
     this.height = height;
-    this.red = new int[width][height];
-    this.green = new int[width][height];
-    this.blue = new int[width][height];
+    this.red = red;
+    this.green = green;
+    this.blue = blue;
   }
 
-  /**
-   * Sets the red value of the pixel at the given coordinates.
-   *
-   * @param x     the x coordinate
-   * @param y     the y coordinate
-   * @param value the red value
-   */
-  @Override
-  public void setRed(int x, int y, int value) {
-    this.red = new int[x][y];
-  }
-
-  /**
-   * Sets the green value of the pixel at the given coordinates.
-   *
-   * @param x     - x coordinate
-   * @param y     - y coordinate
-   * @param value - green value
-   */
-  @Override
-  public void setGreen(int x, int y, int value) {
-    this.green = new int[x][y];
-  }
-
-  /**
-   * Sets the blue value of the pixel at the given coordinates.
-   *
-   * @param x     - x coordinate
-   * @param y     - y coordinate
-   * @param value - blue value
-   */
-  @Override
-  public void setBlue(int x, int y, int value) {
-    this.blue = new int[x][y];
-  }
 
   /**
    * Gets the width of the image.

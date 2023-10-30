@@ -1,6 +1,6 @@
 package model.intf;
 
 public interface ImageLoader {
-  ImageModel loadImage(String path, String name);
+  Image loadImage(String path, String name);
 
 }

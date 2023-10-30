@@ -50,12 +50,11 @@ public class PPMImageLoader implements ImageLoader {
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        int r = sc.nextInt();
-        int g = sc.nextInt();
-        int b = sc.nextInt();
-        System.out.println("Color of pixel (" + j + "," + i + "): " + r + "," + g + "," + b);
+        imageModel.setRed(i,j,sc.nextInt());
+        imageModel.setGreen(i,j,sc.nextInt());
+        imageModel.setBlue(i,j,sc.nextInt());
       }
     }
-    return null;
+    return imageModel;
   }
 }

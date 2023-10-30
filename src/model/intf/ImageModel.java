@@ -1,34 +1,60 @@
 package model.intf;
 
-/**
- * This interface represents an image model.
- */
 public interface ImageModel {
 
+  void load(String path, String name);
+
+  void save(String path, String name);
+
+  void RGBSplit(String path, String name);
+
   /**
-   * Sets the red value of the pixel at the given coordinates.
+   * Brightens/Darkens the image by the given factor.
    *
-   * @param x     the x coordinate
-   * @param y     the y coordinate
-   * @param value the red value
+   * @param image  - image to be brightened
+   * @param factor - factor by which the image is to be brightened
    */
-  void setRed(int x, int y, int value);
+  void brighten(Image image, int factor);
 
   /**
-   * Sets the green value of the pixel at the given coordinates.
+   * Blurs the image.
    *
-   * @param x     - x coordinate
-   * @param y     - y coordinate
-   * @param value - green value
+   * @param image - image to be blurred
    */
-  void setGreen(int x, int y, int value);
+  void blur(Image image);
 
   /**
-   * Sets the blue value of the pixel at the given coordinates.
-   * @param x - x coordinate
-   * @param y - y coordinate
-   * @param value - blue value
+   * Sharpens the image.
+   *
+   * @param image - image to be sharpened
    */
-  void setBlue(int x, int y, int value);
+  void sharpen(Image image);
 
+  /**
+   * Flips the image horizontally.
+   *
+   * @param image - image to be flipped
+   */
+  void horizontalFlip(Image image);
+
+  /**
+   * Flips the image vertically.
+   *
+   * @param image - image to be flipped
+   */
+  void verticalFlip(Image image);
+
+  /**
+   * Converts the image to greyscale.
+   *
+   * @param image - image to be converted
+   */
+  void greyScale(Image image);
+
+  /**
+   * Converts the image to sepia.
+   *
+   * @param image - image to be converted
+   */
+  void sepia(Image image);
 }

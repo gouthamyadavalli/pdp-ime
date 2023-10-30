@@ -3,13 +3,13 @@ package model.impl;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import model.intf.Image;
 import model.intf.ImageLoader;
-import model.intf.ImageModel;
 
 public class PPMImageLoader implements ImageLoader {
 
   @Override
-  public ImageModel loadImage(String path, String name) {
+  public Image loadImage(String path, String name) {
 
     Scanner sc;
 
@@ -46,7 +46,7 @@ public class PPMImageLoader implements ImageLoader {
       throw new IllegalArgumentException("Max value wrong in the file!");
     }
 
-    ImageModel imageModel = new RGBImageModel(name, width, height);
+    //ImageModel imageModel = new RGBImageModel(name, width, height);
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {

@@ -5,6 +5,12 @@ package model.intf;
  */
 public interface Image {
 
+  /**
+   * Gets the name of the image.
+   * @return - name of the image
+   */
+  String getName();
+
 
   /**
    * Gets the width of the image.

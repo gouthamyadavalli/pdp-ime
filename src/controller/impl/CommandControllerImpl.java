@@ -11,6 +11,10 @@ import model.impl.RGBImageModelImpl;
 import model.intf.Image;
 import model.intf.ImageModel;
 
+/**
+ * This class implements the CommandController interface. It is responsible for storing the set of
+ * images and executing the commands on an image.
+ */
 public class CommandControllerImpl implements CommandController {
 
   private ImageModel imageModel;
@@ -22,6 +26,12 @@ public class CommandControllerImpl implements CommandController {
     imageModel = new RGBImageModelImpl();
   }
 
+  /**
+   * This method executes the command on the image by calling the model.
+   *
+   * @param commands - the command from the input
+   * @return - true if the command is exit, false otherwise
+   */
   @Override
   public boolean executeCommand(String[] commands) {
     String command = commands[0].toLowerCase();
@@ -97,6 +107,12 @@ public class CommandControllerImpl implements CommandController {
     return false;
   }
 
+  /**
+   * This method loads the image from the path and adds it to the set of images.
+   *
+   * @param path - the path of the image
+   * @param name - the name of the image
+   */
   private void load(String path, String name) {
     int index = path.lastIndexOf(".");
     Image image;
@@ -115,6 +131,12 @@ public class CommandControllerImpl implements CommandController {
     images.add(image);
   }
 
+  /**
+   * This method saves the image to the path.
+   *
+   * @param path - the path of the image
+   * @param name - the name of the image
+   */
   private void save(String path, String name) {
     Image image;
     try {
@@ -137,6 +159,12 @@ public class CommandControllerImpl implements CommandController {
     }
   }
 
+  /**
+   * This method checks if the type of the image is valid.
+   *
+   * @param type - the type of the image
+   * @return - true if the type is valid, false otherwise
+   */
   private boolean isValidType(String type) {
     String[] validImageIOTypes = {"jpg", "jpeg", "png", "gif"};
 
@@ -148,6 +176,13 @@ public class CommandControllerImpl implements CommandController {
     return false;
   }
 
+  /**
+   * This method gets the image from the set of images.
+   *
+   * @param name - the name of the image
+   * @return - the image
+   * @throws NoSuchObjectException - if the image is not found
+   */
   private Image getImage(String name) throws NoSuchObjectException {
     for (Image i : images) {
       if (i.getName().equals(name)) {

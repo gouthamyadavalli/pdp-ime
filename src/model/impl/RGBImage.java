@@ -49,6 +49,11 @@ public class RGBImage implements Image {
     this.blue = blue;
   }
 
+  /**
+   * Gets the name of the image.
+   *
+   * @return - name of the image
+   */
   @Override
   public String getName() {
     return this.name;
@@ -104,16 +109,27 @@ public class RGBImage implements Image {
     return blue[x][y];
   }
 
+  /**
+   * Checks the equality of two images.
+   *
+   * @param other - the other image
+   * @return - true if the images are equal, false otherwise
+   */
   @Override
-  public boolean equals(Object other){
-    if(!(other instanceof Image)){
+  public boolean equals(Object other) {
+    if (!(other instanceof Image)) {
       return false;
     }
     return this.name.equals(((Image) other).getName());
   }
 
+  /**
+   * Gets the hashcode of the image.
+   *
+   * @return - the hashcode of the image
+   */
   @Override
-  public int hashCode(){
+  public int hashCode() {
     return this.name.hashCode();
   }
 }

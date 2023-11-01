@@ -10,13 +10,21 @@ import java.util.Scanner;
 import model.impl.RGBImage;
 import model.intf.Image;
 
+/**
+ * This class implements the load and save method for a PPM image.
+ */
 public class PPMImageUtil implements ImageLoader {
 
+  /**
+   * This method loads the PPM image from the given path and returns the image.
+   *
+   * @param path - the path of the image
+   * @param name - the name of the image
+   * @return - the image
+   */
   @Override
   public Image loadImage(String path, String name) {
-
     Scanner sc;
-
     try {
       sc = new Scanner(new FileInputStream(path));
     } catch (FileNotFoundException e) {
@@ -64,6 +72,13 @@ public class PPMImageUtil implements ImageLoader {
     return new RGBImage(name, width, height, red, green, blue);
   }
 
+  /**
+   * This method saves the image to the given path.
+   *
+   * @param image - the image to be saved
+   * @param path  - the path of the image
+   * @param type  - the type of the image
+   */
   @Override
   public void saveImage(Image image, String path, String type) {
     if (!"ppm".equalsIgnoreCase(type)) {

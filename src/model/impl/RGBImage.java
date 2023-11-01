@@ -99,4 +99,22 @@ public class RGBImage implements Image {
   public int getBlue(int x, int y) {
     return blue[x][y];
   }
+
+  @Override
+  public String getName(){
+    return this.name;
+  }
+
+  @Override
+  public boolean equals(Object other){
+    if(!(other instanceof Image)){
+      return false;
+    }
+    return this.name.equals(((Image) other).getName());
+  }
+
+  @Override
+  public int hashCode(){
+    return this.name.hashCode();
+  }
 }

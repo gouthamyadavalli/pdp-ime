@@ -46,4 +46,6 @@ public interface Image {
    * @return - blue value
    */
   int getBlue(int x, int y);
+
+  String getName();
 }

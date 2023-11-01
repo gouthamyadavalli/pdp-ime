@@ -46,15 +46,17 @@ public class PPMImageLoader implements ImageLoader {
       throw new IllegalArgumentException("Max value wrong in the file!");
     }
 
-    //ImageModel imageModel = new RGBImageModel(name, width, height);
+    int[][] red = new int[width][height];
+    int[][] green = new int[width][height];
+    int[][] blue = new int[width][height];
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        imageModel.setRed(i,j,sc.nextInt());
-        imageModel.setGreen(i,j,sc.nextInt());
-        imageModel.setBlue(i,j,sc.nextInt());
+        red[i][j] = sc.nextInt();
+        green[i][j] = sc.nextInt();
+        blue[i][j] = sc.nextInt();
       }
     }
-    return imageModel;
+    return new RGBImage(name, width, height, red, green, blue);
   }
 }

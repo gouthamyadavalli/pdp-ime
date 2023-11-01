@@ -49,6 +49,11 @@ public class RGBImage implements Image {
     this.blue = blue;
   }
 
+  @Override
+  public String getName() {
+    return this.name;
+  }
+
   /**
    * Gets the width of the image.
    *
@@ -98,8 +103,6 @@ public class RGBImage implements Image {
   public int getBlue(int x, int y) {
     return blue[x][y];
   }
-
-
 
   @Override
   public boolean equals(Object other){

@@ -11,10 +11,9 @@ public interface ImageModel {
   /**
    * Brightens/Darkens the image by the given factor.
    *
-   * @param image  - image to be brightened
-   * @param factor - factor by which the image is to be brightened
+  `   * @param factor - factor by which the image is to be brightened
    */
-  void brighten(Image image, int factor, String name);
+  void brighten(int factor, String name);
 
   /**
    * Blurs the image.

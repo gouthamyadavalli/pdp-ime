@@ -30,24 +30,13 @@ public final class ImageFilter {
    * @return - sharpen filter
    */
   public static double[][] getSharpenFilter() {
-    double[][] sharpenFilter = new double[5][5];
-    for (int i = 0; i < 5; i++) {
-      sharpenFilter[0][i] = -1.0 / 8.0;
-      sharpenFilter[i][0] = -1.0 / 8.0;
-    }
-    for (int i = 0; i < 5; i++) {
-      sharpenFilter[4][i] = -1.0 / 8.0;
-      sharpenFilter[i][4] = -1.0 / 8.0;
-    }
-    for (int i = 1; i < 4; i++) {
-      for (int j = 1; j < 4; j++) {
-        if (i == 2 && j == 2) {
-          sharpenFilter[i][j] = 1.0;
-          continue;
-        }
-        sharpenFilter[i][j] = 1.0 / 4.0;
-      }
-    }
+    double[][] sharpenFilter;
+    sharpenFilter = new double[][]
+            {{-0.125, -0.125, -0.125, -0.125, -0.125},
+            {-0.125, 0.25, 0.25, 0.25, -0.125},
+            {-0.125, 0.25, 1, 0.25, -0.125},
+            {-0.125, 0.25, 0.25, 0.25, -0.125},
+            {-0.125, -0.125, -0.125, -0.125, -0.125}};
 
     return sharpenFilter;
   }

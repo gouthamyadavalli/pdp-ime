@@ -53,5 +53,4 @@ public interface Image {
    */
   int getBlue(int x, int y);
 
-  String getName();
 }

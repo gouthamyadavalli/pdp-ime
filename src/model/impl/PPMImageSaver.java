@@ -23,9 +23,9 @@ public class PPMImageSaver implements ImageSaver {
 
       for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-          int red = image.getRed(i, j);
-          int green = image.getGreen(i, j);
-          int blue = image.getBlue(i, j);
+          int red = image.getRed(j, i);
+          int green = image.getGreen(j, i);
+          int blue = image.getBlue(j, i);
           writer.write(red + " " + green + " " + blue + " ");
         }
         writer.write("\n");

@@ -110,10 +110,7 @@ public class RGBImage implements Image {
     return blue[x][y];
   }
 
-  @Override
-  public String getName(){
-    return this.name;
-  }
+
 
   @Override
   public boolean equals(Object other){

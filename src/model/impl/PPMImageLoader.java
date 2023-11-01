@@ -52,9 +52,9 @@ public class PPMImageLoader implements ImageLoader {
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        red[i][j] = sc.nextInt();
-        green[i][j] = sc.nextInt();
-        blue[i][j] = sc.nextInt();
+        red[j][i] = sc.nextInt();
+        green[j][i] = sc.nextInt();
+        blue[j][i] = sc.nextInt();
       }
     }
     return new RGBImage(name, width, height, red, green, blue);

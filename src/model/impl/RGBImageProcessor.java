@@ -50,6 +50,32 @@ public class RGBImageProcessor implements ImageProcessor {
     int[][] green = initZero(width, height);
     int[][] blue = initZero(width, height);
 
+    int filterSize = filter.length;
+
+    for (int i=0; i<width; i++){
+      for (int j=0; j<height; j++){
+        int sumR = 0;
+        int sumG = 0;
+        int sumB = 0;
+
+        for(int k=0; k<filterSize; k++){
+          for(int l=0; l<filterSize; l++){
+            int row = i - filterSize/2 + k;
+            int col = j - filterSize/2 + l;
+
+            if(0<=row && row<width && 0<=col && col<height){
+              sumR += (int) (image.getRed(row, col) * filter[k][l]);
+              sumG += (int) (image.getGreen(row, col) * filter[k][l]);
+              sumB += (int) (image.getBlue(row, col) * filter[k][l]);
+            }
+          }
+        }
+        red[i][j] = clamp(sumR, 0);
+        green[i][j] = clamp(sumG, 0);
+        blue[i][j] = clamp(sumB, 0);
+      }
+    }
+
     return new RGBImage(name, width, height, red, green, blue);
   }
 
@@ -133,7 +159,7 @@ public class RGBImageProcessor implements ImageProcessor {
     int[][] green = initZero(width, height);
     int[][] blue = initZero(width, height);
     for (int i = 0; i < width; i++) {
-      for (int j = 0; j < width; j++) {
+      for (int j = 0; j < height; j++) {
         int average = getAverage(image.getRed(i, j), image.getGreen(i, j), image.getBlue(i, j));
         red[i][j] = average;
         green[i][j] = average;
@@ -160,7 +186,8 @@ public class RGBImageProcessor implements ImageProcessor {
         blue[i][j] = luma;
       }
     }
-    return null;
+    return new RGBImage(name, width, height, red,
+            green, blue);
   }
 
   /**

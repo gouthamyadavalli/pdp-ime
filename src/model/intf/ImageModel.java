@@ -6,55 +6,34 @@ public interface ImageModel {
 
   void save(String path, String name);
 
-  void RGBSplit(String name, String redName, String greenName, String blueName);
+  Image[] RGBSplit(String name, String redName, String greenName, String blueName);
 
-  /**
-   * Brightens/Darkens the image by the given factor.
-   *
-   * @param image  - image to be brightened
-   * @param factor - factor by which the image is to be brightened
-   */
-  void brighten(Image image, int factor, String name);
+  Image brighten(int factor, String name, String newName);
 
-  /**
-   * Blurs the image.
-   *
-   * @param image - image to be blurred
-   */
-  void blur(Image image, String name);
+  Image blur(String name, String newName);
 
-  /**
-   * Sharpens the image.
-   *
-   * @param image - image to be sharpened
-   */
-  void sharpen(Image image, String name);
+  Image sharpen(String name, String newName);
 
-  /**
-   * Flips the image horizontally.
-   *
-   * @param image - image to be flipped
-   */
-  void horizontalFlip(Image image, String name);
+  Image getValueComponent(String name, String newName);
 
-  /**
-   * Flips the image vertically.
-   *
-   * @param image - image to be flipped
-   */
-  void verticalFlip(Image image, String name);
+  Image getIntensityComponent(String name, String newName);
 
-  /**
-   * Converts the image to greyscale.
-   *
-   * @param image - image to be converted
-   */
-  void greyScale(Image image, String name);
+  Image getLumaComponent(String name, String newName);
 
-  /**
-   * Converts the image to sepia.
-   *
-   * @param image - image to be converted
-   */
-  void sepia(Image image, String name);
+  Image horizontalFlip(String name, String newName);
+
+  Image verticalFlip(String name, String newName);
+
+  Image sepia(String name, String newName);
+
+  Image greyscale(String name, String newName);
+
+  Image getRedComponent(String name, String newName);
+
+  Image getGreenComponent(String name, String newName);
+
+  Image getBlueComponent(String name, String newName);
+
+  Image getRGBCombined(String newName, String redName, String greenName, String blueName);
+
 }

@@ -30,9 +30,12 @@ public class CommandParserImpl implements CommandParser {
       if ("exit".equalsIgnoreCase(command)) {
         isExit = true;
       } else if("run".equalsIgnoreCase(command)) {
-        this.scriptInterpreterImpl.executeScript(args[1]);
+        this.scriptInterpreterImpl.executeScript(args[1], this.out);
       } else {
-        this.commandExecutorImpl.executeCommand(args);
+        boolean exitInScript = this.commandExecutorImpl.executeCommand(args);
+        if (exitInScript) {
+          isExit = true;
+        }
       }
     }
   }

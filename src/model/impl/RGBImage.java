@@ -50,17 +50,6 @@ public class RGBImage implements Image {
   }
 
   /**
-   * Gets the name of the image.
-   *
-   * @return - name of the image
-   */
-  @Override
-  public String getName() {
-    return name;
-  }
-
-
-  /**
    * Gets the width of the image.
    *
    * @return - width of the image

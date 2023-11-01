@@ -3,7 +3,6 @@ package model.impl;
 import java.rmi.NoSuchObjectException;
 import java.util.HashSet;
 import java.util.Set;
-
 import model.intf.Image;
 import model.intf.ImageModel;
 import model.intf.ImageProcessor;
@@ -85,57 +84,106 @@ public class ImageModelImpl implements ImageModel {
   }
 
   @Override
-  public void RGBSplit(String name, String redName, String greenName, String blueName) {
+  public Image[] RGBSplit(String name, String redName, String greenName, String blueName) {
     Image image;
+    Image[] splitImages = new Image[3];
     try {
       image = getImage(name);
     } catch (NoSuchObjectException e) {
       throw new RuntimeException(e);
     }
-    images.add(imageProcessor.getRedComponent(image, redName));
-    images.add(imageProcessor.getBlueComponent(image, blueName));
-    images.add(imageProcessor.getGreenComponent(image, greenName));
+    Image red = imageProcessor.getRedComponent(image, redName);
+    Image green = imageProcessor.getGreenComponent(image, greenName);
+    Image blue = imageProcessor.getBlueComponent(image, blueName);
+    splitImages[0] = red;
+    splitImages[1] = green;
+    splitImages[2] = blue;
+
+    images.add(red);
+    images.add(green);
+    images.add(blue);
+    return splitImages;
   }
 
   @Override
-  public void brighten(int factor, String name) {
+  public Image brighten(int factor, String name, String newName) {
     Image image;
+    Image resultImage;
     try {
       image = getImage(name);
+      resultImage = imageProcessor.brighten(image, factor, newName);
     } catch (NoSuchObjectException e) {
       throw new RuntimeException(e);
     }
+    return resultImage;
   }
 
   @Override
-  public void blur(Image image, String name) {
-
+  public Image blur(String name, String newName) {
+    return null;
   }
 
   @Override
-  public void sharpen(Image image, String name) {
-
+  public Image sharpen(String name, String newName) {
+    return null;
   }
 
   @Override
-  public void horizontalFlip(Image image, String name) {
-
+  public Image getValueComponent(String name, String newName) {
+    return null;
   }
 
   @Override
-  public void verticalFlip(Image image, String name) {
-
+  public Image getIntensityComponent(String name, String newName) {
+    return null;
   }
 
   @Override
-  public void greyScale(Image image, String name) {
+  public Image getLumaComponent(String name, String newName) {
+    return null;
+  }
 
+
+  @Override
+  public Image horizontalFlip(String name, String newName) {
+    return null;
   }
 
   @Override
-  public void sepia(Image image, String name) {
-
+  public Image verticalFlip(String name, String newName) {
+    return null;
   }
+
+  @Override
+  public Image sepia(String name, String newName) {
+    return null;
+  }
+
+  @Override
+  public Image greyscale(String name, String newName) {
+    return null;
+  }
+
+  @Override
+  public Image getRedComponent(String name, String newName) {
+    return null;
+  }
+
+  @Override
+  public Image getGreenComponent(String name, String newName) {
+    return null;
+  }
+
+  @Override
+  public Image getBlueComponent(String name, String newName) {
+    return null;
+  }
+
+  @Override
+  public Image getRGBCombined(String newName, String redName, String greenName, String blueName) {
+    return null;
+  }
+
 
 }
 

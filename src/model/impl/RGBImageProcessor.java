@@ -16,43 +16,23 @@ public class RGBImageProcessor implements ImageProcessor {
    * @return - brightened or darkened image
    */
   @Override
-  public Image brighten(Image image, int factor) {
-    int[][] redComponent = new int[image.getWidth()][image.getHeight()];
-    int[][] greenComponent = new int[image.getWidth()][image.getHeight()];
-    int[][] blueComponent = new int[image.getWidth()][image.getHeight()];
-    for (int i = 0; i < image.getWidth(); i++) {
-      for (int j = 0; j < image.getHeight(); j++) {
-        int newRed = image.getRed(i, j) + factor;
-        int newGreen = image.getGreen(i, j) + factor;
-        int newBlue = image.getBlue(i, j) + factor;
-        if (factor < 0) {
-          if (newRed < 0) {
-            newRed = 0;
-          }
-          if (newGreen < 0) {
-            newGreen = 0;
-          }
-          if (newBlue < 0) {
-            newBlue = 0;
-          }
-        } else {
-          if (newRed > 255) {
-            newRed = 255;
-          }
-          if (newGreen > 255) {
-            newGreen = 255;
-          }
-          if (newBlue > 255) {
-            newBlue = 255;
-          }
-        }
-        redComponent[i][j] = newRed;
-        greenComponent[i][j] = newGreen;
-        blueComponent[i][j] = newBlue;
+  public Image brighten(Image image, int factor, String name) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    int[][] red = initZero(width, height);
+    int[][] green = initZero(width, height);
+    int[][] blue = initZero(width, height);
+
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
+        red[i][j] = clamp(image.getRed(i, j), factor);
+        green[i][j] = clamp(image.getGreen(i, j), factor);
+        blue[i][j] = clamp(image.getBlue(i, j), factor);
       }
     }
-    return new RGBImage(image.getName(), image.getWidth(), image.getHeight(), redComponent,
-        greenComponent, blueComponent);
+
+    return new RGBImage(name, width, height, red, green, blue);
   }
 
   /**
@@ -62,36 +42,17 @@ public class RGBImageProcessor implements ImageProcessor {
    * @return - blurred image
    */
   @Override
-  public Image blur(Image image) {
-    int[][] redComponent = new int[image.getWidth()][image.getHeight()];
-    int[][] greenComponent = new int[image.getWidth()][image.getHeight()];
-    int[][] blueComponent = new int[image.getWidth()][image.getHeight()];
+  public Image blur(Image image, String name) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    int[][] red = initZero(width, height);
+    int[][] green = initZero(width, height);
+    int[][] blue = initZero(width, height);
+
     double[][] blurFilter = ImageFilter.getBlurFilter();
-    int filterSize = blurFilter.length;
-    for (int i = 0; i < image.getWidth(); i++) {
-      for (int j = 0; j < image.getHeight(); j++) {
-        int newRed = 0;
-        int newGreen = 0;
-        int newBlue = 0;
-        for (int k = 0; k < filterSize; k++) {
-          for (int l = 0; l < filterSize; l++) {
-            int x = i - filterSize / 2 + k;
-            int y = j - filterSize / 2 + l;
-            if (x < 0 || x >= image.getWidth() || y < 0 || y >= image.getHeight()) {
-              continue;
-            }
-            newRed += blurFilter[k][l] * image.getRed(x, y);
-            newGreen += blurFilter[k][l] * image.getGreen(x, y);
-            newBlue += blurFilter[k][l] * image.getBlue(x, y);
-          }
-        }
-        redComponent[i][j] = newRed;
-        greenComponent[i][j] = newGreen;
-        blueComponent[i][j] = newBlue;
-      }
-    }
-    return new RGBImage(image.getName(), image.getWidth(), image.getHeight(), redComponent,
-        greenComponent, blueComponent);
+
+    return new RGBImage(name, width, height, red, green, blue);
   }
 
   /**
@@ -101,8 +62,17 @@ public class RGBImageProcessor implements ImageProcessor {
    * @return - sharpened image
    */
   @Override
-  public Image sharpen(Image image) {
-    return null;
+  public Image sharpen(Image image, String name) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    int[][] red = initZero(width, height);
+    int[][] green = initZero(width, height);
+    int[][] blue = initZero(width, height);
+
+    double[][] sharpen = ImageFilter.getSharpenFilter();
+
+    return new RGBImage(name, width, height, red, green, blue);
   }
 
   /**
@@ -112,19 +82,22 @@ public class RGBImageProcessor implements ImageProcessor {
    * @return - flipped image
    */
   @Override
-  public Image horizontalFlip(Image image) {
-    int[][] redComponent = new int[image.getWidth()][image.getHeight()];
-    int[][] greenComponent = new int[image.getWidth()][image.getHeight()];
-    int[][] blueComponent = new int[image.getWidth()][image.getHeight()];
-    for (int i = 0; i < image.getWidth(); i++) {
-      for (int j = 0; j < image.getHeight(); j++) {
-        redComponent[i][j] = image.getRed(image.getWidth() - 1 - i, j);
-        greenComponent[i][j] = image.getGreen(image.getWidth() - 1 - i, j);
-        blueComponent[i][j] = image.getBlue(image.getWidth() - 1 - i, j);
+  public Image horizontalFlip(Image image, String name) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    int[][] red = initZero(width, height);
+    int[][] green = initZero(width, height);
+    int[][] blue = initZero(width, height);
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
+        red[i][j] = image.getRed(width - 1 - i, j);
+        green[i][j] = image.getGreen(width - 1 - i, j);
+        blue[i][j] = image.getBlue(width - 1 - i, j);
       }
     }
-    return new RGBImage(image.getName(), image.getWidth(), image.getHeight(), redComponent,
-        greenComponent, blueComponent);
+    return new RGBImage(name, image.getWidth(), image.getHeight(), red,
+        green, blue);
   }
 
   /**
@@ -134,19 +107,81 @@ public class RGBImageProcessor implements ImageProcessor {
    * @return - flipped image
    */
   @Override
-  public Image verticalFlip(Image image) {
-    int[][] redComponent = new int[image.getWidth()][image.getHeight()];
-    int[][] greenComponent = new int[image.getWidth()][image.getHeight()];
-    int[][] blueComponent = new int[image.getWidth()][image.getHeight()];
-    for (int i = 0; i < image.getWidth(); i++) {
-      for (int j = 0; j < image.getHeight(); j++) {
-        redComponent[i][j] = image.getRed(i, image.getHeight() - 1 - j);
-        greenComponent[i][j] = image.getGreen(i, image.getHeight() - 1 - j);
-        blueComponent[i][j] = image.getBlue(i, image.getHeight() - 1 - j);
+  public Image verticalFlip(Image image, String name) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    int[][] red = initZero(width, height);
+    int[][] green = initZero(width, height);
+    int[][] blue = initZero(width, height);
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
+        red[i][j] = image.getRed(i, height - 1 - j);
+        green[i][j] = image.getGreen(i, height - 1 - j);
+        blue[i][j] = image.getBlue(i, height - 1 - j);
       }
     }
-    return new RGBImage(image.getName(), image.getWidth(), image.getHeight(), redComponent,
-        greenComponent, blueComponent);
+    return new RGBImage(name, image.getWidth(), image.getHeight(), red,
+        green, blue);
+  }
+
+  @Override
+  public Image getValueComponent(Image image, String name) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    int[][] red = initZero(width, height);
+    int[][] green = initZero(width, height);
+    int[][] blue = initZero(width, height);
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
+        int max = getMax(image.getRed(i, j), image.getGreen(i, j), image.getBlue(i, j));
+        red[i][j] = max;
+        green[i][j] = max;
+        blue[i][j] = max;
+      }
+    }
+    return new RGBImage(name, width, height, red,
+        green, blue);
+  }
+
+  @Override
+  public Image getIntensityComponent(Image image, String name) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    int[][] red = initZero(width, height);
+    int[][] green = initZero(width, height);
+    int[][] blue = initZero(width, height);
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < width; j++) {
+        int average = getAverage(image.getRed(i, j), image.getGreen(i, j), image.getBlue(i, j));
+        red[i][j] = average;
+        green[i][j] = average;
+        blue[i][j] = average;
+      }
+    }
+    return new RGBImage(name, width, height, red,
+        green, blue);
+  }
+
+  @Override
+  public Image getLumaComponent(Image image, String name) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    int[][] red = initZero(width, height);
+    int[][] green = initZero(width, height);
+    int[][] blue = initZero(width, height);
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
+        int luma = getLuma(image.getRed(i, j), image.getGreen(i, j), image.getBlue(i, j));
+        red[i][j] = luma;
+        green[i][j] = luma;
+        blue[i][j] = luma;
+      }
+    }
+    return null;
   }
 
   /**
@@ -156,14 +191,20 @@ public class RGBImageProcessor implements ImageProcessor {
    * @return - red component of the image
    */
   @Override
-  public int[][] getRedComponent(Image image) {
-    int[][] redComponent = new int[image.getWidth()][image.getHeight()];
+  public Image getRedComponent(Image image, String name) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    int[][] red = initZero(width, height);
+    int[][] green = initZero(width, height);
+    int[][] blue = initZero(width, height);
     for (int i = 0; i < image.getWidth(); i++) {
       for (int j = 0; j < image.getHeight(); j++) {
-        redComponent[i][j] = image.getRed(i, j);
+        red[i][j] = image.getRed(i, j);
       }
     }
-    return redComponent;
+    return new RGBImage(name, width, height, red,
+        green, blue);
   }
 
   /**
@@ -173,14 +214,20 @@ public class RGBImageProcessor implements ImageProcessor {
    * @return - green component of the image
    */
   @Override
-  public int[][] getGreenComponent(Image image) {
-    int[][] greenComponent = new int[image.getWidth()][image.getHeight()];
+  public Image getGreenComponent(Image image, String name) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    int[][] red = initZero(width, height);
+    int[][] green = initZero(width, height);
+    int[][] blue = initZero(width, height);
     for (int i = 0; i < image.getWidth(); i++) {
       for (int j = 0; j < image.getHeight(); j++) {
-        greenComponent[i][j] = image.getGreen(i, j);
+        green[i][j] = image.getGreen(i, j);
       }
     }
-    return greenComponent;
+    return new RGBImage(name, width, height, red,
+        green, blue);
   }
 
   /**
@@ -190,13 +237,49 @@ public class RGBImageProcessor implements ImageProcessor {
    * @return - blue component of the image
    */
   @Override
-  public int[][] getBlueComponent(Image image) {
-    int[][] blueComponent = new int[image.getWidth()][image.getHeight()];
+  public Image getBlueComponent(Image image, String name) {
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    int[][] red = initZero(width, height);
+    int[][] green = initZero(width, height);
+    int[][] blue = initZero(width, height);
     for (int i = 0; i < image.getWidth(); i++) {
       for (int j = 0; j < image.getHeight(); j++) {
-        blueComponent[i][j] = image.getBlue(i, j);
+        blue[i][j] = image.getBlue(i, j);
       }
     }
-    return blueComponent;
+    return new RGBImage(name, width, height, red,
+        green, blue);
+  }
+
+  private int clamp(int pixel, int factor) {
+    pixel += factor;
+    pixel = Math.min(pixel, 255);
+    pixel = Math.max(pixel, 0);
+
+    return pixel;
+  }
+
+  private int[][] initZero(int width, int height) {
+    int[][] newArr = new int[width][height];
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
+        newArr[i][j] = 0;
+      }
+    }
+    return newArr;
+  }
+
+  private int getMax(int red, int green, int blue) {
+    return Math.max(Math.max(red, green), blue);
+  }
+
+  private int getAverage(int red, int green, int blue) {
+    return (red + green + blue) / 3;
+  }
+
+  private int getLuma(int red, int green, int blue) {
+    return (int) (0.2126 * red + 0.7152 * green + 0.0722 * blue);
   }
 }

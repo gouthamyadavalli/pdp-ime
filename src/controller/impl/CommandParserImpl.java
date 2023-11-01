@@ -8,14 +8,14 @@ public class CommandParserImpl implements CommandParser {
 
   private final Readable in;
   private final Appendable out;
-  private CommandExecutorImpl commandExecutorImpl;
+  private CommandControllerImpl commandExecutorImpl;
   private ScriptInterpreterImpl scriptInterpreterImpl;
 
 
   public CommandParserImpl(Readable in, Appendable out) {
     this.in = in;
     this.out = out;
-    this.commandExecutorImpl = new CommandExecutorImpl();
+    this.commandExecutorImpl = new CommandControllerImpl();
     this.scriptInterpreterImpl = new ScriptInterpreterImpl();
   }
 

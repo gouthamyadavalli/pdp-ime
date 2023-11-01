@@ -2,7 +2,7 @@ package controller.impl;
 
 import static java.lang.Integer.parseInt;
 
-import controller.intf.CommandExecutor;
+import controller.intf.CommandController;
 import java.rmi.NoSuchObjectException;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -11,13 +11,13 @@ import model.impl.RGBImageModelImpl;
 import model.intf.Image;
 import model.intf.ImageModel;
 
-public class CommandExecutorImpl implements CommandExecutor {
+public class CommandControllerImpl implements CommandController {
 
   private ImageModel imageModel;
 
   private final Set<Image> images;
 
-  public CommandExecutorImpl() {
+  public CommandControllerImpl() {
     images = new HashSet<Image>();
     imageModel = new RGBImageModelImpl();
   }

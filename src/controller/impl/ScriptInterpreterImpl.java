@@ -1,6 +1,6 @@
 package controller.impl;
 
-import controller.intf.CommandExecutor;
+import controller.intf.CommandController;
 import controller.intf.ScriptInterpreter;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,10 +8,10 @@ import java.util.Scanner;
 
 public class ScriptInterpreterImpl implements ScriptInterpreter {
 
-  private CommandExecutor commandExecutor;
+  private CommandController commandController;
 
   public ScriptInterpreterImpl() {
-    commandExecutor = new CommandExecutorImpl();
+    commandController = new CommandControllerImpl();
   }
 
   @Override
@@ -29,7 +29,7 @@ public class ScriptInterpreterImpl implements ScriptInterpreter {
         sb.append(line);
         out.append("\n").append(line);
         String[] args = sb.toString().trim().split(" ");
-        commandExecutor.executeCommand(args);
+        commandController.executeCommand(args);
       }
     }
 

@@ -1,12 +1,16 @@
-package model.impl;
+package controller.impl;
 
+import controller.intf.ImageLoader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
+import model.impl.RGBImage;
 import model.intf.Image;
-import model.intf.ImageLoader;
 
-public class PPMImageLoader implements ImageLoader {
+public class PPMImageUtil implements ImageLoader {
 
   @Override
   public Image loadImage(String path, String name) {
@@ -58,5 +62,32 @@ public class PPMImageLoader implements ImageLoader {
       }
     }
     return new RGBImage(name, width, height, red, green, blue);
+  }
+
+  @Override
+  public void saveImage(Image image, String path, String type) {
+    if (!"ppm".equalsIgnoreCase(type)) {
+      throw new IllegalArgumentException("Invalid save type!");
+    }
+    int height = image.getHeight();
+    int width = image.getWidth();
+
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+      writer.write("P3\n");
+      writer.write(width + " " + height + "\n");
+      writer.write("255\n");
+
+      for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+          int red = image.getRed(j, i);
+          int green = image.getGreen(j, i);
+          int blue = image.getBlue(j, i);
+          writer.write(red + " " + green + " " + blue + " ");
+        }
+        writer.write("\n");
+      }
+    } catch (IOException e) {
+      throw new IllegalArgumentException("Max value wrong in the file!");
+    }
   }
 }

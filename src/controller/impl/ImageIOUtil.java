@@ -1,16 +1,14 @@
-package model.impl;
+package controller.impl;
 
+import controller.intf.ImageLoader;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
+import model.impl.RGBImage;
 import model.intf.Image;
-import model.intf.ImageLoader;
-import model.intf.ImageModel;
 
-public class ImageIOLoader implements ImageLoader {
+public class ImageIOUtil implements ImageLoader {
   @Override
   public Image loadImage(String path, String name) {
     try {
@@ -39,6 +37,31 @@ public class ImageIOLoader implements ImageLoader {
 
       return new RGBImage(name, width, height, red, green, blue);
 
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public void saveImage(Image image, String path, String type) {
+
+
+    int width = image.getWidth();
+    int height = image.getHeight();
+
+    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
+        int rgb = image.getRed(i, j);
+        rgb = (rgb << 8) + image.getGreen(i, j);
+        rgb = (rgb << 8) + image.getBlue(i, j);
+
+        buf.setRGB(i, j, rgb);
+      }
+    }
+
+    try {
+      ImageIO.write(buf, "png", new File(path));
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

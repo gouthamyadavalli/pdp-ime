@@ -20,15 +20,8 @@ public interface ImageProcessor {
    * @param image - image to be blurred
    * @return - blurred image
    */
-  Image blur(Image image, String name);
+  Image applyFilter(Image image, String name, double[][] filter);
 
-  /**
-   * Sharpens the image.
-   *
-   * @param image - image to be sharpened
-   * @return - sharpened image
-   */
-  Image sharpen(Image image, String name);
 
   /**
    * Flips the image horizontally.

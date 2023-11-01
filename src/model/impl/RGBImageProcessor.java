@@ -36,13 +36,13 @@ public class RGBImageProcessor implements ImageProcessor {
   }
 
   /**
-   * Blurs the image.
+   * Applies the given filter to the image.
    *
-   * @param image - image to be blurred
-   * @return - blurred image
+   * @param image - image to apply the filter to
+   * @return - filtered image
    */
   @Override
-  public Image blur(Image image, String name) {
+  public Image applyFilter(Image image, String name, double[][] filter) {
     int width = image.getWidth();
     int height = image.getHeight();
 
@@ -50,30 +50,9 @@ public class RGBImageProcessor implements ImageProcessor {
     int[][] green = initZero(width, height);
     int[][] blue = initZero(width, height);
 
-    double[][] blurFilter = ImageFilter.getBlurFilter();
-
     return new RGBImage(name, width, height, red, green, blue);
   }
 
-  /**
-   * Sharpens the image.
-   *
-   * @param image - image to be sharpened
-   * @return - sharpened image
-   */
-  @Override
-  public Image sharpen(Image image, String name) {
-    int width = image.getWidth();
-    int height = image.getHeight();
-
-    int[][] red = initZero(width, height);
-    int[][] green = initZero(width, height);
-    int[][] blue = initZero(width, height);
-
-    double[][] sharpen = ImageFilter.getSharpenFilter();
-
-    return new RGBImage(name, width, height, red, green, blue);
-  }
 
   /**
    * Flips the image horizontally.

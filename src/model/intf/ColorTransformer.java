@@ -6,19 +6,12 @@ package model.intf;
 public interface ColorTransformer {
 
   /**
-   * Converts the image to greyscale.
+   * Transforms the image according to the given transformation matrix.
    *
    * @param image - image to be converted
    * @return - greyscale image
    */
-  Image greyScale(Image image);
+  Image transform(Image image, String name, double[][] transformer);
 
-  /**
-   * Converts the image to sepia.
-   *
-   * @param image - image to be converted
-   * @return - sepia image
-   */
-  Image sepia(Image image);
 
 }

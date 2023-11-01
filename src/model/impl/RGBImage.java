@@ -40,13 +40,23 @@ public class RGBImage implements Image {
    * @param height the height of the image
    */
   public RGBImage(String name, int width, int height, int[][] red, int[][] green,
-                       int[][] blue) {
+      int[][] blue) {
     this.name = name;
     this.width = width;
     this.height = height;
     this.red = red;
     this.green = green;
     this.blue = blue;
+  }
+
+  /**
+   * Gets the name of the image.
+   *
+   * @return - name of the image
+   */
+  @Override
+  public String getName() {
+    return name;
   }
 
 

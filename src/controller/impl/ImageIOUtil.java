@@ -8,7 +8,18 @@ import javax.imageio.ImageIO;
 import model.impl.RGBImage;
 import model.intf.Image;
 
+/**
+ * This class implements the load and save method for an ImageIO image.
+ */
 public class ImageIOUtil implements ImageLoader {
+
+  /**
+   * This method loads the image from the given path and returns the image.
+   *
+   * @param path - the path of the image
+   * @param name - the name of the image
+   * @return - the image
+   */
   @Override
   public Image loadImage(String path, String name) {
     try {
@@ -16,14 +27,13 @@ public class ImageIOUtil implements ImageLoader {
       int height = img.getHeight();
       int width = img.getWidth();
 
-//
       int[][] red = new int[width][height];
       int[][] green = new int[width][height];
       int[][] blue = new int[width][height];
 
-      for(int i=0; i<width; i++){
-        for(int j=0; j<height; j++){
-          int rgb = img.getRGB(i,j);
+      for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+          int rgb = img.getRGB(i, j);
           int r = (rgb >> 16) & 0xFF;
           int g = (rgb >> 8) & 0xFF;
           int b = rgb & 0xFF;
@@ -33,19 +43,21 @@ public class ImageIOUtil implements ImageLoader {
           blue[i][j] = b;
         }
       }
-
-
       return new RGBImage(name, width, height, red, green, blue);
-
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new RuntimeException("Error in loading image");
     }
   }
 
+  /**
+   * This method saves the image to the given path.
+   *
+   * @param image - the image to be saved
+   * @param path  - the path of the image
+   * @param type  - the type of the image
+   */
   @Override
   public void saveImage(Image image, String path, String type) {
-
-
     int width = image.getWidth();
     int height = image.getHeight();
 

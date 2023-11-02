@@ -8,6 +8,7 @@ public class ImageTransformer {
 
   /**
    * Gets the transformation matrix for a greyscale transformation.
+   *
    * @return - transformation matrix
    */
   public static double[][] getGreyScaleTransformer() {
@@ -17,6 +18,7 @@ public class ImageTransformer {
 
   /**
    * Gets the transformation matrix for a sepia transformation.
+   *
    * @return - transformation matrix
    */
   public static double[][] getSepiaTransformer() {

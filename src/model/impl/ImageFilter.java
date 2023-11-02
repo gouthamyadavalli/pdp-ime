@@ -32,12 +32,11 @@ public final class ImageFilter {
   public static double[][] getSharpenFilter() {
     double[][] sharpenFilter;
     sharpenFilter = new double[][]
-            {{-0.125, -0.125, -0.125, -0.125, -0.125},
+        {{-0.125, -0.125, -0.125, -0.125, -0.125},
             {-0.125, 0.25, 0.25, 0.25, -0.125},
             {-0.125, 0.25, 1, 0.25, -0.125},
             {-0.125, 0.25, 0.25, 0.25, -0.125},
             {-0.125, -0.125, -0.125, -0.125, -0.125}};
-
     return sharpenFilter;
   }
 

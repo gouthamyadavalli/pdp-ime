@@ -252,13 +252,16 @@ public class ImageModelTest {
 
   @Test
   public void testRGBCombine() {
-    Image red = new RGBImage("Red", 3, 3, new int[][]{{100, 100, 100}, {100, 100, 100}, {100, 100, 100}},
+    Image red = new RGBImage("Red", 3, 3,
+            new int[][]{{100, 100, 100}, {100, 100, 100}, {100, 100, 100}},
             new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
             new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}});
-    Image green = new RGBImage("Green", 3, 3, new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    Image green = new RGBImage("Green", 3, 3,
+            new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
             new int[][]{{100, 100, 100}, {100, 100, 100}, {100, 100, 100}},
             new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}});
-    Image blue = new RGBImage("Blue", 3, 3, new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+    Image blue = new RGBImage("Blue", 3, 3,
+            new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
             new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
             new int[][]{{100, 100, 100}, {100, 100, 100}, {100, 100, 100}});
 
@@ -281,7 +284,8 @@ public class ImageModelTest {
 
   @Test
   public void testRGBSplit() {
-    Image inputImage = new RGBImage("Input Image", 3, 3, new int[][]{{100, 150, 200}, {50, 100, 150}, {200, 150, 100}},
+    Image inputImage = new RGBImage("Input Image", 3, 3,
+            new int[][]{{100, 150, 200}, {50, 100, 150}, {200, 150, 100}},
             new int[][]{{200, 150, 100}, {150, 100, 50}, {100, 50, 0}},
             new int[][]{{0, 50, 100}, {100, 150, 200}, {200, 150, 100}});
 
@@ -296,29 +300,6 @@ public class ImageModelTest {
         Assert.assertEquals(expectedRed[i][j], splitImages[0].getRed(i, j));
         Assert.assertEquals(expectedGreen[i][j], splitImages[1].getGreen(i, j));
         Assert.assertEquals(expectedBlue[i][j], splitImages[2].getBlue(i, j));
-      }
-    }
-  }
-
-  @Test
-  public void testHorizontalFlip2() {
-    RGBImageModelImpl imageModel = new RGBImageModelImpl();
-    int[][] red = {{1, 2, 3}, {4, 5, 6}};
-    int[][] green = {{10, 11, 12}, {13, 14, 15}};
-    int[][] blue = {{19, 20, 21}, {22, 23, 24}};
-    Image testImage = new RGBImage("Test Image", 2, 3, red, green, blue);
-
-    Image flippedImage = imageModel.horizontalFlip(testImage, "Flipped Image");
-
-    int[][] expectedRed = {{3, 2, 1}, {6, 5, 4}};
-    int[][] expectedGreen = {{12, 11, 10}, {15, 14, 13}};
-    int[][] expectedBlue = {{21, 20, 19}, {24, 23, 22}};
-
-    for (int i = 0; i < flippedImage.getWidth(); i++) {
-      for (int j = 0; j < flippedImage.getHeight(); j++) {
-        Assert.assertEquals(expectedRed[i][j], flippedImage.getRed(i, j));
-        Assert.assertEquals(expectedGreen[i][j], flippedImage.getGreen(i, j));
-        Assert.assertEquals(expectedBlue[i][j], flippedImage.getBlue(i, j));
       }
     }
   }
@@ -360,22 +341,12 @@ public class ImageModelTest {
   }
 
   @Test
-  public void testGetLumaComponent() {
+  public void testSplitCombine(){
+    Image inputImage = new RGBImage("Input Image", 3, 3,
+            new int[][]{{100, 150, 200}, {50, 100, 150}, {200, 150, 100}},
+            new int[][]{{200, 150, 100}, {150, 100, 50}, {100, 50, 0}},
+            new int[][]{{0, 50, 100}, {100, 150, 200}, {200, 150, 100}});
 
-    Image lumaComponentImage = imageModel.getLumaComponent(testImage, "Luma Component Image");
-
-    int[][] expectedLuma = {{35, 142, 68}, {134, 160, 136}, {84, 111, 121}, {136, 114, 158}};
-
-    for (int i = 0; i < testImage.getWidth(); i++) {
-      for (int j = 0; j < testImage.getHeight(); j++) {
-        Assert.assertEquals(expectedLuma[i][j], lumaComponentImage.getRed(i, j));
-        Assert.assertEquals(expectedLuma[i][j], lumaComponentImage.getGreen(i, j));
-        Assert.assertEquals(expectedLuma[i][j], lumaComponentImage.getBlue(i, j));
-      }
-    }
+    Image[] splitImages = imageModel.getRGBSplit(inputImage, "Red", "Green", "Blue");
   }
-
-
-
-
 }

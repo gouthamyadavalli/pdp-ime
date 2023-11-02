@@ -18,8 +18,8 @@ public class ScriptInterpreterImpl implements ScriptInterpreter {
   /**
    * This constructor initializes the command controller.
    */
-  public ScriptInterpreterImpl() {
-    commandController = new CommandControllerImpl();
+  public ScriptInterpreterImpl(CommandController commandController) {
+    this.commandController = new CommandControllerImpl();
   }
 
   /**
@@ -34,20 +34,20 @@ public class ScriptInterpreterImpl implements ScriptInterpreter {
     Scanner scanner = new Scanner(System.in);
     try {
       scanner = new Scanner(new FileInputStream(scriptPath));
-      StringBuilder sb = new StringBuilder();
       while (scanner.hasNextLine()) {
         String line = scanner.nextLine();
-        if (!line.startsWith("#")) {
-          sb.append(line);
-          out.append("\n").append(line);
-          String[] args = sb.toString().trim().split(" ");
+        if (!line.startsWith("#") && !line.isEmpty() && !line.isBlank()) {
+          String[] args = line.trim().split(" ");
           commandController.executeCommand(args, out);
         }
       }
+      out.append("\n");
     } catch (FileNotFoundException e) {
       out.append("\nFile not found!\n");
     } catch (Exception e) {
       out.append(e.getMessage());
+    } finally {
+      scanner.close();
     }
   }
 }

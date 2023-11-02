@@ -40,67 +40,91 @@ public class CommandControllerImpl implements CommandController {
         return true;
       case "load":
         check3Input(commands);
+        out.append("Loading image as ").append(commands[2]).append("\n");
         load(commands[1], commands[2]);
         break;
       case "save":
         check3Input(commands);
+        out.append("Saving image as ").append(commands[2]).append("\n");
         save(commands[1], commands[2]);
         break;
       case "brighten":
         check4Input(commands);
+        out.append("Brightening image by ").append(commands[1]).append("\n");
         images.add(
             imageModel.brighten(getImage(commands[2]), parseInt(commands[1]), commands[3]));
         break;
       case "blur":
         check3Input(commands);
+        out.append("Blurring image and calling it ").append(commands[2]).append(" \n");
         images.add(imageModel.blur(getImage(commands[1]), commands[2]));
         break;
       case "sharpen":
         check3Input(commands);
+        out.append("Sharpening image and calling it ").append(commands[2]).append(" \n");
         images.add(imageModel.sharpen(getImage(commands[1]), commands[2]));
         break;
       case "horizontal-flip":
         check3Input(commands);
+        out.append("Flipping image horizontally and calling it ").append(commands[2]).append(" \n");
         images.add(imageModel.horizontalFlip(getImage(commands[1]), commands[2]));
         break;
       case "vertical-flip":
         check3Input(commands);
+        out.append("Flipping image vertically and calling it ").append(commands[2]).append(" \n");
         images.add(imageModel.verticalFlip(getImage(commands[1]), commands[2]));
         break;
       case "sepia":
         check3Input(commands);
+        out.append("Transforming image to sepia and calling it ").append(commands[2]).append(" \n");
         images.add(imageModel.sepia(getImage(commands[1]), commands[2]));
         break;
       case "greyscale":
         check3Input(commands);
+        out.append("Transforming image to greyscale and calling it ").append(commands[2])
+            .append(" \n");
         images.add(imageModel.greyscale(getImage(commands[1]), commands[2]));
         break;
       case "red-component":
         check3Input(commands);
+        out.append("Getting red component of image and calling it ").append(commands[2])
+            .append(" \n");
         images.add(imageModel.getRedComponent(getImage(commands[1]), commands[2]));
         break;
       case "green-component":
         check3Input(commands);
+        out.append("Getting green component of image and calling it ").append(commands[2])
+            .append(" \n");
         images.add(imageModel.getGreenComponent(getImage(commands[1]), commands[2]));
         break;
       case "blue-component":
         check3Input(commands);
+        out.append("Getting blue component of image and calling it ").append(commands[2])
+            .append(" \n");
         images.add(imageModel.getBlueComponent(getImage(commands[1]), commands[2]));
         break;
       case "value-component":
         check3Input(commands);
+        out.append("Getting value component of image and calling it ").append(commands[2])
+            .append(" \n");
         images.add(imageModel.getValueComponent(getImage(commands[1]), commands[2]));
         break;
       case "intensity-component":
         check3Input(commands);
+        out.append("Getting intensity component of image and calling it ").append(commands[2])
+            .append(" \n");
         images.add(imageModel.getIntensityComponent(getImage(commands[1]), commands[2]));
         break;
       case "luma-component":
         check3Input(commands);
+        out.append("Getting luma component of image and calling it ").append(commands[2])
+            .append(" \n");
         images.add(imageModel.getLumaComponent(getImage(commands[1]), commands[2]));
         break;
       case "rgb-split":
         check5Input(commands);
+        out.append("Splitting image into RGB components and calling them ").append(commands[2])
+            .append(" ").append(commands[3]).append(" ").append(commands[4]).append(" \n");
         Image[] splitImages = imageModel.getRGBSplit(getImage(commands[1]), commands[2],
             commands[3], commands[4]);
         images.add(splitImages[0]);
@@ -109,6 +133,8 @@ public class CommandControllerImpl implements CommandController {
         break;
       case "rgb-combine":
         check5Input(commands);
+        out.append("Combining RGB components into image and calling it ").append(commands[2])
+            .append(" \n");
         images.add(
             imageModel.getRGBCombined(commands[1], getImage(commands[2]), getImage(commands[3]),
                 getImage(commands[4])));

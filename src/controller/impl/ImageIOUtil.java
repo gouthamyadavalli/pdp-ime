@@ -1,6 +1,6 @@
 package controller.impl;
 
-import controller.intf.ImageLoader;
+import controller.intf.ImageLoaderSaver;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +12,7 @@ import model.intf.Image;
 /**
  * This class implements the load and save method for an ImageIO image.
  */
-public class ImageIOUtil implements ImageLoader {
+public class ImageIOUtil implements ImageLoaderSaver {
 
   /**
    * This method loads the image from the given path and returns the image.

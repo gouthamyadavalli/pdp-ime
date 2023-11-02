@@ -6,7 +6,7 @@ import model.intf.Image;
 /**
  * This interface represents the Image Loader. It loads and saves the image.
  */
-public interface ImageLoader {
+public interface ImageLoaderSaver {
 
   /**
    * This method loads the image from the given path and returns the image.

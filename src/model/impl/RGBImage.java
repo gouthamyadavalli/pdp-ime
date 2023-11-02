@@ -8,11 +8,6 @@ import model.intf.Image;
 public class RGBImage implements Image {
 
   /**
-   * The name of the image.
-   */
-  private String name;
-
-  /**
    * The width of the image.
    */
   private final int width;
@@ -21,17 +16,21 @@ public class RGBImage implements Image {
    */
   private final int height;
   /**
+   * The name of the image.
+   */
+  private final String name;
+  /**
    * The red value matrix.
    */
-  private int[][] red;
+  private final int[][] red;
   /**
    * The green value matrix.
    */
-  private int[][] green;
+  private final int[][] green;
   /**
    * The blue value matrix.
    */
-  private int[][] blue;
+  private final int[][] blue;
 
   /**
    * Constructs an RGB image model with the given width and height.
@@ -40,7 +39,7 @@ public class RGBImage implements Image {
    * @param height the height of the image
    */
   public RGBImage(String name, int width, int height, int[][] red, int[][] green,
-      int[][] blue) {
+                  int[][] blue) {
     this.name = name;
     this.width = width;
     this.height = height;
@@ -117,10 +116,26 @@ public class RGBImage implements Image {
    */
   @Override
   public boolean equals(Object other) {
-    if (!(other instanceof Image)) {
+    if (!(other instanceof Image o)) {
       return false;
     }
-    return this.name.equals(((Image) other).getName());
+    if (!this.name.equals(o.getName())) {
+      return false;
+    }
+    if (this.height != o.getHeight() || this.width != o.getWidth()) {
+      return false;
+    }
+    for (int i = 0; i < this.width; i++) {
+      for (int j = 0; j < this.height; j++) {
+        if (red[i][j] != o.getRed(i, j)
+                || green[i][j] != o.getGreen(i, j)
+                || blue[i][j] != o.getGreen(i, j)) {
+          return false;
+        }
+      }
+    }
+
+    return true;
   }
 
   /**

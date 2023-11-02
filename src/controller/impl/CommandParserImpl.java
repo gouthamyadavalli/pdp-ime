@@ -37,26 +37,32 @@ public class CommandParserImpl implements CommandParser {
    */
   @Override
   public void readCommand() throws IOException {
+    Scanner scan = new Scanner(this.in);
     boolean isExit = false;
+
     while (!isExit) {
-      this.out.append("Enter command: ");
-      Scanner scan = new Scanner(this.in);
-      String[] args = scan.nextLine().trim().split(" ");
-      String command = args[0];
-      if ("exit".equalsIgnoreCase(command)) {
-        // exit the program
-        isExit = true;
-      } else if ("run".equalsIgnoreCase(command)) {
-        // parsing the script
-        this.scriptInterpreterImpl.executeScript(args[1], this.out);
-      } else {
-        // execute the command
-        boolean exitInScript = this.commandExecutorImpl.executeCommand(args);
-        if (exitInScript) {
+      try {
+        this.out.append("Enter command: ");
+        String[] args = scan.nextLine().trim().split(" ");
+        String command = args[0];
+        if ("exit".equalsIgnoreCase(command)) {
+          // exit the program
           isExit = true;
+          this.out.append("\nExiting the program...");
+        } else if ("run".equalsIgnoreCase(command)) {
+          this.out.append("\nReading the script...");
+          // parsing the script
+          this.scriptInterpreterImpl.executeScript(args[1], this.out);
+        } else {
+          // execute the command
+          boolean exitInScript = this.commandExecutorImpl.executeCommand(args, this.out);
+          if (exitInScript) {
+            isExit = true;
+          }
         }
+      } catch (Exception e) {
+        this.out.append(e.getMessage()).append("\n");
       }
     }
   }
-
 }

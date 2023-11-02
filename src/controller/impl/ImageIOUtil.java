@@ -3,6 +3,7 @@ package controller.impl;
 import controller.intf.ImageLoader;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import model.impl.RGBImage;
@@ -45,7 +46,7 @@ public class ImageIOUtil implements ImageLoader {
       }
       return new RGBImage(name, width, height, red, green, blue);
     } catch (IOException e) {
-      throw new RuntimeException("Error in loading image");
+      throw new RuntimeException("Error in loading image, check file path");
     }
   }
 
@@ -57,7 +58,7 @@ public class ImageIOUtil implements ImageLoader {
    * @param type  - the type of the image
    */
   @Override
-  public void saveImage(Image image, String path, String type) {
+  public void saveImage(Image image, String path, String type) throws IOException {
     int width = image.getWidth();
     int height = image.getHeight();
 
@@ -72,10 +73,11 @@ public class ImageIOUtil implements ImageLoader {
       }
     }
 
+    File file = new File(path);
     try {
-      ImageIO.write(buf, "png", new File(path));
+      ImageIO.write(buf, "png", file);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new FileNotFoundException("File path not found!");
     }
   }
 }

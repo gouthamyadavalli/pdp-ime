@@ -1,5 +1,6 @@
 package controller.intf;
 
+import java.io.IOException;
 import model.intf.Image;
 
 /**
@@ -14,7 +15,7 @@ public interface ImageLoader {
    * @param name - the name of the image
    * @return - the image
    */
-  Image loadImage(String path, String name);
+  Image loadImage(String path, String name) throws IllegalArgumentException;
 
   /**
    * This method saves the image to the given path.
@@ -23,6 +24,6 @@ public interface ImageLoader {
    * @param path  - the path of the image
    * @param type  - the type of the image
    */
-  void saveImage(Image image, String path, String type);
+  void saveImage(Image image, String path, String type) throws IOException;
 
 }

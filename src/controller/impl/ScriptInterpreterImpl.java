@@ -3,6 +3,7 @@ package controller.impl;
 import controller.intf.CommandController;
 import controller.intf.ScriptInterpreter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -33,19 +34,20 @@ public class ScriptInterpreterImpl implements ScriptInterpreter {
     Scanner scanner = new Scanner(System.in);
     try {
       scanner = new Scanner(new FileInputStream(scriptPath));
-    } catch (IOException e) {
-      out.append("File not found!");
-    }
-    StringBuilder sb = new StringBuilder();
-    while (scanner.hasNextLine()) {
-      String line = scanner.nextLine();
-      if (!line.startsWith("#")) {
-        sb.append(line);
-        out.append("\n").append(line);
-        String[] args = sb.toString().trim().split(" ");
-        commandController.executeCommand(args);
+      StringBuilder sb = new StringBuilder();
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        if (!line.startsWith("#")) {
+          sb.append(line);
+          out.append("\n").append(line);
+          String[] args = sb.toString().trim().split(" ");
+          commandController.executeCommand(args, out);
+        }
       }
+    } catch (FileNotFoundException e) {
+      out.append("\nFile not found!\n");
+    } catch (Exception e) {
+      out.append(e.getMessage());
     }
-
   }
 }

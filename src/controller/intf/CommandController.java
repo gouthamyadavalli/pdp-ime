@@ -1,5 +1,7 @@
 package controller.intf;
 
+import java.io.IOException;
+
 /**
  * This interface represents the main controller. It executes the input commands.
  */
@@ -11,5 +13,5 @@ public interface CommandController {
    * @param commands - the command from the input
    * @return - true if the command is exit, false otherwise
    */
-  boolean executeCommand(String[] commands);
+  boolean executeCommand(String[] commands, Appendable out) throws IOException;
 }

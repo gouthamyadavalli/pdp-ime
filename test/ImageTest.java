@@ -1,13 +1,6 @@
-import controller.impl.ImageIOUtil;
-import controller.impl.PPMImageUtil;
-import model.impl.ImageFilter;
-import model.impl.RGBImageModelImpl;
-import model.intf.Image;
-import org.junit.Test;
-
 public class ImageTest {
 
-  @Test
+  /*@Test
   public void imageTest() {
 //    Image testImage = new PPMImageUtil().loadImage(
 //        "/Users/goutham/Sem1/PDP/projects/pdp-ime/images/pngNew.ppm", "test");
@@ -21,6 +14,6 @@ public class ImageTest {
 //
 //    new ImageIOUtil().saveImage(flipImage,
 //        "/Users/goutham/Sem1/PDP/projects/pdp-ime/images/h-test2.png", "png");
-  }
+  }*/
 
 }

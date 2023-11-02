@@ -130,7 +130,7 @@ public class RGBImage implements Image {
       for (int j = 0; j < this.height; j++) {
         if (red[i][j] != o.getRed(i, j)
                 || green[i][j] != o.getGreen(i, j)
-                || blue[i][j] != o.getGreen(i, j)) {
+                || blue[i][j] != o.getBlue(i, j)) {
           return false;
         }
       }

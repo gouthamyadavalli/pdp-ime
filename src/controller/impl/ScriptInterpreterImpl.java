@@ -46,8 +46,6 @@ public class ScriptInterpreterImpl implements ScriptInterpreter {
       out.append("\nFile not found!\n");
     } catch (Exception e) {
       out.append(e.getMessage());
-    } finally {
-      scanner.close();
     }
   }
 }

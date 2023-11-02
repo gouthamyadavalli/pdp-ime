@@ -40,13 +40,15 @@ public class CommandControllerImpl implements CommandController {
         return true;
       case "load":
         check3Input(commands);
+        String loadPath = checkFilePath(commands);
         out.append("Loading image as ").append(commands[2]).append("\n");
-        load(commands[1], commands[2]);
+        load(loadPath, commands[commands.length - 1]);
         break;
       case "save":
         check3Input(commands);
+        String savePath = checkFilePath(commands);
         out.append("Saving image as ").append(commands[2]).append("\n");
-        save(commands[1], commands[2]);
+        save(savePath, commands[2]);
         break;
       case "brighten":
         check4Input(commands);
@@ -245,6 +247,17 @@ public class CommandControllerImpl implements CommandController {
     if (commands.length < 5) {
       throw new IllegalArgumentException("Invalid number of arguments for " + commands[0]);
     }
+  }
+
+  private String checkFilePath(String[] commands) throws IllegalArgumentException {
+    StringBuilder filePath = new StringBuilder(commands[1]);
+    if (commands.length > 3) {
+      // Concatenate parts after index 1 to get the complete file path
+      for (int i = 2; i < commands.length; i++) {
+        filePath.append(" ").append(commands[i]);
+      }
+    }
+    return filePath.toString();
   }
 
 

@@ -64,8 +64,6 @@ public class CommandParserImpl implements CommandParser {
         }
       } catch (Exception e) {
         this.out.append(e.getMessage()).append("\n");
-      } finally {
-        scan.close();
       }
     }
   }

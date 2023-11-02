@@ -1,6 +1,8 @@
 package controller.impl;
 
+import controller.intf.CommandController;
 import controller.intf.CommandParser;
+import controller.intf.ScriptInterpreter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -12,8 +14,8 @@ public class CommandParserImpl implements CommandParser {
 
   private final Readable in;
   private final Appendable out;
-  private CommandControllerImpl commandExecutorImpl;
-  private ScriptInterpreterImpl scriptInterpreterImpl;
+  private CommandController commandController;
+  private ScriptInterpreter scriptInterpreter;
 
 
   /**
@@ -26,8 +28,8 @@ public class CommandParserImpl implements CommandParser {
   public CommandParserImpl(Readable in, Appendable out) {
     this.in = in;
     this.out = out;
-    this.commandExecutorImpl = new CommandControllerImpl();
-    this.scriptInterpreterImpl = new ScriptInterpreterImpl();
+    this.commandController = new CommandControllerImpl();
+    this.scriptInterpreter = new ScriptInterpreterImpl(this.commandController);
   }
 
   /**
@@ -39,29 +41,31 @@ public class CommandParserImpl implements CommandParser {
   public void readCommand() throws IOException {
     Scanner scan = new Scanner(this.in);
     boolean isExit = false;
-
     while (!isExit) {
       try {
         this.out.append("Enter command: ");
-        String[] args = scan.nextLine().trim().split(" ");
+        String commandline = scan.nextLine().trim();
+        String[] args = commandline.split(" ");
         String command = args[0];
         if ("exit".equalsIgnoreCase(command)) {
           // exit the program
           isExit = true;
-          this.out.append("\nExiting the program...");
+          this.out.append("Exiting the program...");
         } else if ("run".equalsIgnoreCase(command)) {
-          this.out.append("\nReading the script...");
+          this.out.append("Reading the script...\n");
           // parsing the script
-          this.scriptInterpreterImpl.executeScript(args[1], this.out);
+          this.scriptInterpreter.executeScript(args[1], this.out);
         } else {
           // execute the command
-          boolean exitInScript = this.commandExecutorImpl.executeCommand(args, this.out);
+          boolean exitInScript = this.commandController.executeCommand(args, this.out);
           if (exitInScript) {
             isExit = true;
           }
         }
       } catch (Exception e) {
         this.out.append(e.getMessage()).append("\n");
+      } finally {
+        scan.close();
       }
     }
   }

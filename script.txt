@@ -1,0 +1,11 @@
+#loading the image
+load images/beach-balls.jpg a
+
+#blur the image
+blur a blur-ball
+
+#red component
+red-component blur-ball red-ball
+
+#save it
+save images/red-ball.jpg red-ball

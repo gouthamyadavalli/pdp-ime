@@ -1,6 +1,6 @@
 package controller.impl;
 
-import controller.intf.ImageLoader;
+import controller.intf.ImageLoaderSaver;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,7 +13,7 @@ import model.intf.Image;
 /**
  * This class implements the load and save method for a PPM image.
  */
-public class PPMImageUtil implements ImageLoader {
+public class PPMImageUtil implements ImageLoaderSaver {
 
   /**
    * This method loads the PPM image from the given path and returns the image.

@@ -116,9 +116,10 @@ public class RGBImage implements Image {
    */
   @Override
   public boolean equals(Object other) {
-    if (!(other instanceof Image o)) {
+    if (!(other instanceof Image)) {
       return false;
     }
+    Image o = (Image) other;
     if (!this.name.equals(o.getName())) {
       return false;
     }

@@ -82,6 +82,7 @@ public class ImageModelTest {
       }
     }
   }
+
   @Test
   public void testVerticalFlip() {
     Image flippedImage = imageModel.verticalFlip(testImage, "Horizontal Flipped Image");
@@ -121,15 +122,19 @@ public class ImageModelTest {
 
   @Test
   public void testIntensityComponent() {
-    Image inputImage = new RGBImage("Input Image", 3, 3, new int[][]{{100, 150, 200}, {50, 100, 150}, {0, 50, 100}},
+    Image inputImage = new RGBImage("Input Image", 3, 3,
+            new int[][]{{100, 150, 200}, {50, 100, 150}, {0, 50, 100}},
             new int[][]{{200, 150, 100}, {150, 100, 50}, {100, 50, 0}},
             new int[][]{{0, 50, 100}, {50, 100, 150}, {100, 150, 200}});
 
-    Image intensityImage = new RGBImageModelImpl().getIntensityComponent(inputImage, "Intensity Image");
+    Image intensityImage = new RGBImageModelImpl().getIntensityComponent(
+            inputImage, "Intensity Image");
 
     for (int i = 0; i < intensityImage.getWidth(); i++) {
       for (int j = 0; j < intensityImage.getHeight(); j++) {
-        int average = (inputImage.getRed(i, j) + inputImage.getGreen(i, j) + inputImage.getBlue(i, j)) / 3;
+        int average = (inputImage.getRed(i, j)
+                + inputImage.getGreen(i, j)
+                + inputImage.getBlue(i, j)) / 3;
         Assert.assertEquals(average, intensityImage.getRed(i, j));
         Assert.assertEquals(average, intensityImage.getGreen(i, j));
         Assert.assertEquals(average, intensityImage.getBlue(i, j));
@@ -139,7 +144,8 @@ public class ImageModelTest {
 
   @Test
   public void testLumaComponent() {
-    Image inputImage = new RGBImage("Input Image", 3, 3, new int[][]{{100, 150, 200}, {50, 100, 150}, {200, 150, 100}},
+    Image inputImage = new RGBImage("Input Image", 3, 3,
+            new int[][]{{100, 150, 200}, {50, 100, 150}, {200, 150, 100}},
             new int[][]{{200, 150, 100}, {150, 100, 50}, {100, 150, 200}},
             new int[][]{{150, 100, 50}, {100, 50, 0}, {50, 0, 100}});
 
@@ -147,7 +153,9 @@ public class ImageModelTest {
 
     for (int i = 0; i < lumaImage.getWidth(); i++) {
       for (int j = 0; j < lumaImage.getHeight(); j++) {
-        int expectedValue = (int) (0.2126 * inputImage.getRed(i, j) + 0.7152 * inputImage.getGreen(i, j) + 0.0722 * inputImage.getBlue(i, j));
+        int expectedValue = (int) (0.2126 * inputImage.getRed(i, j)
+                + 0.7152 * inputImage.getGreen(i, j)
+                + 0.0722 * inputImage.getBlue(i, j));
         Assert.assertEquals(expectedValue, lumaImage.getRed(i, j));
         Assert.assertEquals(expectedValue, lumaImage.getGreen(i, j));
         Assert.assertEquals(expectedValue, lumaImage.getBlue(i, j));
@@ -157,11 +165,13 @@ public class ImageModelTest {
 
   @Test
   public void testRedComponent() {
-    Image inputImage = new RGBImage("Input Image", 3, 3, new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}},
+    Image inputImage = new RGBImage("Input Image", 3, 3,
+            new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}},
             new int[][]{{10, 11, 12}, {13, 14, 15}, {16, 17, 18}},
             new int[][]{{19, 20, 21}, {22, 23, 24}, {25, 26, 27}});
 
-    Image redComponentImage = new RGBImage("Red Component Image", 3, 3, new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}},
+    Image redComponentImage = new RGBImage("Red Component Image", 3, 3,
+            new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}},
             new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
             new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}});
 
@@ -178,11 +188,13 @@ public class ImageModelTest {
 
   @Test
   public void testGreenComponent() {
-    Image inputImage = new RGBImage("Input Image", 3, 3, new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}},
+    Image inputImage = new RGBImage("Input Image", 3, 3,
+            new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}},
             new int[][]{{10, 11, 12}, {13, 14, 15}, {16, 17, 18}},
             new int[][]{{19, 20, 21}, {22, 23, 24}, {25, 26, 27}});
 
-    Image greenComponentImage = new RGBImageModelImpl().getGreenComponent(inputImage, "Green Component Image");
+    Image greenComponentImage = new RGBImageModelImpl().getGreenComponent(
+            inputImage, "Green Component Image");
 
     for (int i = 0; i < greenComponentImage.getWidth(); i++) {
       for (int j = 0; j < greenComponentImage.getHeight(); j++) {
@@ -195,10 +207,12 @@ public class ImageModelTest {
 
   @Test
   public void testBlueComponent() {
-    Image inputImage = new RGBImage("Input Image", 3, 3, new int[][]{{100, 150, 200}, {50, 100, 150}, {0, 50, 100}},
+    Image inputImage = new RGBImage("Input Image", 3, 3,
+            new int[][]{{100, 150, 200}, {50, 100, 150}, {0, 50, 100}},
             new int[][]{{200, 150, 100}, {150, 100, 50}, {100, 50, 0}},
             new int[][]{{0, 50, 100}, {50, 100, 150}, {100, 150, 200}});
-    Image blueComponentImage = imageModel.getBlueComponent(inputImage, "Blue Component Image");
+    Image blueComponentImage = imageModel.getBlueComponent(
+            inputImage, "Blue Component Image");
 
     for (int i = 0; i < inputImage.getWidth(); i++) {
       for (int j = 0; j < inputImage.getHeight(); j++) {
@@ -211,7 +225,8 @@ public class ImageModelTest {
 
   @Test
   public void testSepiaTransformation() {
-    Image inputImage = new RGBImage("Input Image", 3, 3, new int[][]{{100, 150, 200}, {50, 100, 150}, {200, 150, 100}},
+    Image inputImage = new RGBImage("Input Image", 3, 3,
+            new int[][]{{100, 150, 200}, {50, 100, 150}, {200, 150, 100}},
             new int[][]{{200, 150, 100}, {150, 100, 50}, {100, 50, 0}},
             new int[][]{{0, 50, 100}, {100, 150, 200}, {200, 150, 100}});
 
@@ -233,7 +248,8 @@ public class ImageModelTest {
   @Test
   public void testGreyscaleTransformation() {
     ImageModel imageModel = new RGBImageModelImpl();
-    Image image = new RGBImage("Test Image", 3, 3, new int[][]{{100, 150, 200}, {50, 100, 150}, {0, 50, 100}},
+    Image image = new RGBImage("Test Image", 3, 3,
+            new int[][]{{100, 150, 200}, {50, 100, 150}, {0, 50, 100}},
             new int[][]{{200, 150, 100}, {150, 100, 50}, {100, 50, 0}},
             new int[][]{{0, 50, 100}, {50, 100, 150}, {100, 150, 200}});
     Image greyscaleImage = imageModel.greyscale(image, "Greyscale Image");
@@ -271,7 +287,8 @@ public class ImageModelTest {
     int[][] expectedGreen = {{100, 100, 100}, {100, 100, 100}, {100, 100, 100}};
     int[][] expectedBlue = {{100, 100, 100}, {100, 100, 100}, {100, 100, 100}};
 
-    Image expectedImage = new RGBImage("Comb", 3, 3, expectedRed, expectedGreen, expectedBlue);
+    Image expectedImage = new RGBImage(
+            "Comb", 3, 3, expectedRed, expectedGreen, expectedBlue);
 
     for (int i = 0; i < result.getWidth(); i++) {
       for (int j = 0; j < result.getHeight(); j++) {
@@ -289,7 +306,8 @@ public class ImageModelTest {
             new int[][]{{200, 150, 100}, {150, 100, 50}, {100, 50, 0}},
             new int[][]{{0, 50, 100}, {100, 150, 200}, {200, 150, 100}});
 
-    Image[] splitImages = imageModel.getRGBSplit(inputImage, "Red", "Green", "Blue");
+    Image[] splitImages = imageModel.getRGBSplit(
+            inputImage, "Red", "Green", "Blue");
 
     int[][] expectedRed = {{100, 150, 200}, {50, 100, 150}, {200, 150, 100}};
     int[][] expectedGreen = {{200, 150, 100}, {150, 100, 50}, {100, 50, 0}};
@@ -323,7 +341,8 @@ public class ImageModelTest {
 
   @Test
   public void testGetValueComponent() {
-    Image valueComponentImage = imageModel.getValueComponent(testImage, "Value Component Image");
+    Image valueComponentImage = imageModel.getValueComponent(
+            testImage, "Value Component Image");
 
     int[][] expectedValueComponent = {
             {255, 255, 255},
@@ -341,12 +360,53 @@ public class ImageModelTest {
   }
 
   @Test
-  public void testSplitCombine(){
+  public void testSplitCombine() {
     Image inputImage = new RGBImage("Input Image", 3, 3,
             new int[][]{{100, 150, 200}, {50, 100, 150}, {200, 150, 100}},
             new int[][]{{200, 150, 100}, {150, 100, 50}, {100, 50, 0}},
             new int[][]{{0, 50, 100}, {100, 150, 200}, {200, 150, 100}});
 
-    Image[] splitImages = imageModel.getRGBSplit(inputImage, "Red", "Green", "Blue");
+    Image[] splitImages = imageModel.getRGBSplit(
+            inputImage, "Red", "Green", "Blue");
+    Image result = new RGBImageModelImpl().getRGBCombined(
+            "Combined", splitImages[0], splitImages[1], splitImages[2]);
+    for (int i = 0; i < result.getWidth(); i++) {
+      for (int j = 0; j < result.getHeight(); j++) {
+        Assert.assertEquals(inputImage.getRed(i, j), result.getRed(i, j));
+        Assert.assertEquals(inputImage.getGreen(i, j), result.getGreen(i, j));
+        Assert.assertEquals(inputImage.getBlue(i, j), result.getBlue(i, j));
+      }
+    }
   }
+
+  @Test
+  public void testFlipHorizontalTwice() {
+    Image flippedImage = imageModel.horizontalFlip(testImage, "Horizontal Flipped Image");
+    flippedImage = imageModel.horizontalFlip(flippedImage, "Horizontal Flipped Image");
+
+    for (int i = 0; i < flippedImage.getWidth(); i++) {
+      for (int j = 0; j < flippedImage.getHeight(); j++) {
+        Assert.assertEquals(testImage.getRed(i, j), flippedImage.getRed(i, j));
+        Assert.assertEquals(testImage.getGreen(i, j), flippedImage.getGreen(i, j));
+        Assert.assertEquals(testImage.getBlue(i, j), flippedImage.getBlue(i, j));
+      }
+    }
+  }
+
+  @Test
+  public void testFlipVerticalTwice() {
+    Image flippedImage = imageModel.verticalFlip(testImage, "Vertical Flipped Image");
+    flippedImage = imageModel.verticalFlip(flippedImage, "Vertical Flipped Image");
+
+    for (int i = 0; i < flippedImage.getWidth(); i++) {
+      for (int j = 0; j < flippedImage.getHeight(); j++) {
+        Assert.assertEquals(testImage.getRed(i, j), flippedImage.getRed(i, j));
+        Assert.assertEquals(testImage.getGreen(i, j), flippedImage.getGreen(i, j));
+        Assert.assertEquals(testImage.getBlue(i, j), flippedImage.getBlue(i, j));
+      }
+    }
+  }
+
+
 }
+
